@@ -1,0 +1,45 @@
+<!--user שליפת טבלת  -->
+
+<!-- <label *ngFor="let t of userService.allUsers">
+<p>{{t.userId}}</p>
+<p>{{t.firstName}}</p>
+<p>{{t.lastName}}</p>
+<p>{{t.phone}}</p>
+<p>{{t.email}}</p>
+<p>{{t.password}}</p>
+<p>{{t.isFirstAid}}</p>
+<p>--------------------------------------</p>
+</label> -->
+
+
+<section>
+    <div class="login-container">
+        <h2>כניסה</h2>
+
+        <form (ngSubmit)="save()" #myForm="ngForm">
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/mail.png' id="pic">
+                    <i class="fa-solid fa-envelope"></i>
+                </span>
+
+                <input type="text" id="email"  [(ngModel)]="mail" name="email" required>
+                <label for="email">מייל</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/password.png' id="pic">
+                    <i class="fa-solid fa-lock"></i>
+                </span>
+
+                <input required type="password" id="pw" [(ngModel)]="password" name="p">
+                <label for="pw">סיסמה</label>
+            </div>
+
+
+            <!-- <input type="submit" value="Submit" id="submit"> -->
+             <button type="submit" value="submit" [disabled]="!myForm.valid">שליחה</button>
+        </form>
+    </div>
+</section>

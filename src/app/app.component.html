@@ -1,0 +1,24 @@
+<!--TypeTrip שליפת טבלת  -->
+
+<!-- <label *ngFor="let t of TypeTripService.allTypeTrip">
+<p>{{t.typeId}}</p>
+<p>{{t.typeName}}</p>
+</label> -->
+
+
+
+<div class="container">
+    <nav>
+        <ul>
+            <a routerLink="./home"><li>דף הבית</li></a>
+            <a routerLink="./login"><li>כניסה</li></a>
+            <a routerLink="./register"><li>הרשמה</li></a>
+            <a routerLink="./ourTrips"><li>הטיולים שלנו</li></a>
+        </ul>
+<!-- מציג תמיד -->
+        <!-- <h1 id="name" *ngIf="currencyUser.firstName==undefined">{{ currencyUser.firstName + ' ' + currencyUser.lastName }}</h1> -->
+        <h1 id="name" *ngIf="currencyUser">{{ currencyUser.firstName + ' ' + currencyUser.lastName }}</h1>
+    </nav>
+
+</div>
+<router-outlet></router-outlet>
