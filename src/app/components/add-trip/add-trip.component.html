@@ -1,0 +1,182 @@
+<section>
+    <div class="login-container">
+        <h2>פרטי הטיול</h2>
+
+        <form [formGroup]="myForm" (ngSubmit)="save()">
+
+
+            <!-- yhad -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/map.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="yhad" type="text" id="yhad" name="yhad" required [(ngModel)]="yhad">
+                <label for="yhad">יעד הטיול</label>
+            </div>
+            <div id="error" *ngIf="gYhad.invalid &&(gYhad.touched || gYhad.dirty)">
+                <p *ngIf="gYhad.errors!['required']">שדה חובה</p>
+                <p *ngIf="gYhad.errors!['pattern']">בעברית בלבד</p>
+            </div>
+
+
+            <!-- tripType -->
+            <div class="input-box">
+                <!-- <span class="icon">
+                    <img src='../assets/image/name.png' id="pic">
+                    <i class="fa-solid fa-envelope"></i>
+                </span> -->
+
+                <select name="select" id="select" formControlName="tripTypeId" type="number"
+                    (change)="openShow($event)">
+                    <option value="0" ><em>בחירת סוג הטיול</em></option>
+                    <option *ngFor="let t of typeTripsService.allTypeTrip" value="{{t.typeId}}">
+                        {{t.typeName}}
+                    </option>
+                    <option value="other">אחר</option>
+
+                </select>
+            </div>
+
+
+            <!-- tripDate -->
+            <div class="input-box">
+                <input formControlName="tripDate" type="date" id="tripDate" name="tripDate"
+                 required [(ngModel)]="date"  [min]="minDate" [max]="maxDate">
+                <label for="tripDate">תאריך</label>
+            </div>
+            <div id="error" *ngIf="gTripDate.invalid &&(gTripDate.touched || gTripDate.dirty)">
+                <p *ngIf="gTripDate.errors!['required']">שדה חובה</p>
+            </div>
+
+
+            <!-- time -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/time.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="tripTime" type="number" id="tripTime" name="tripTime" required [(ngModel)]="time">
+                <label for="tripTime">שעת יציאה</label>
+            </div>
+            <div id="error" *ngIf="gTripTime.invalid &&(gTripTime.touched || gTripTime.dirty)">
+                <p *ngIf="gTripTime.errors!['required']">שדה חובה</p>
+                <p *ngIf="gTripTime.errors!['min']">שעה לא תקינה</p>
+                <p *ngIf="gTripTime.errors!['max']">שעה לא תקינה</p>
+            </div>
+
+
+            <!-- duration -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/duration.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="tripDuration" type="number" id="tripDuration" name="tripDuration" required [(ngModel)]="duration">
+                <label for="tripDuration">משך זמן הטיול</label>
+            </div>
+            <div id="error" *ngIf="gTripDuration.invalid &&(gTripDuration.touched || gTripDuration.dirty)">
+                <p *ngIf="gTripDuration.errors!['required']">שדה חובה</p>
+                <p *ngIf="gTripDuration.errors!['min']">טיול קצר מידי</p>
+                <p *ngIf="gTripDuration.errors!['max']">טיול ארוך מידי</p>
+            </div>
+
+
+
+
+            <!-- places -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/place.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="tripEmptyPlace" type="number" id="tripEmptyPlace" name="tripEmptyPlace"
+                    required [(ngModel)]="places">
+                <label for="tripEmptyPlace">מספר מקומות</label>
+            </div>
+            <div id="error" *ngIf="gTripEmptyPlace.invalid &&(gTripEmptyPlace.touched || gTripEmptyPlace.dirty)">
+                <p *ngIf="gTripEmptyPlace.errors!['required']">שדה חובה</p>
+                <p *ngIf="gTripEmptyPlace.errors!['min']">מספר המקומות אינו תקין</p>
+            </div>
+
+
+            <!-- price -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/shek.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="price" type="number" id="price" name="price" required [(ngModel)]="price">
+                <label for="price">מחיר</label>
+            </div>
+            <div id="error" *ngIf="gPrice.invalid &&(gPrice.touched || gPrice.dirty)">
+                <p *ngIf="gPrice.errors!['required']">שדה חובה</p>
+                <p *ngIf="gPrice.errors!['min']">המחיר אינו תקין</p>
+                <p *ngIf="gPrice.errors!['max']">יקר מידי</p>
+            </div>
+
+
+            <!-- picture -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/img.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="picture" type="text" id="picture" name="picture" required [(ngModel)]="pic">
+                <label for="picture">תמונה</label>
+            </div>
+            <div id="error" *ngIf="gPicture.invalid &&(gPicture.touched || gPicture.dirty)">
+                <p *ngIf="gPicture.errors!['required']">שדה חובה</p>
+            </div>
+
+
+
+            <!-- isFirstAid  -->
+            <label *ngIf="status=='old'" class="container" for="isFirstAid" id="firstAid">?האם קיים כבר חובש בטיול
+                <input type="checkbox" id="isFirstAid" formControlName="isFirstAid">
+                <div class="checkmark" id="checkbox"></div>
+            </label>
+            <br>
+            <br>
+            <br>
+
+
+                <button type="submit" [style.background-color]="myForm.valid ? '#0500a0' : '#0500a00d'"
+                [style.cursor]="myForm.valid ? 'pointer' : 'not-allowed'"
+                [disabled]="!myForm.valid" value="submit" id="submitBtn">שליחה</button>
+        </form>
+
+        <div class="modal-background" *ngIf="show == true">
+            <div class="place">
+                <button class="close-button" id="closeShow" (click)="closeShow()">X</button>
+
+                <div class="place">
+
+                    <div class="input-box">
+
+                        <input type="text" id="place" required name="place" [(ngModel)]="newTypeTrip.typeName">
+                        <label id="myPlace" for="place">הכנס סוג טיול</label>
+
+
+
+                    </div>
+                    <button type="button" value="submit" (click)="addTypeTrip()">לאישור </button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+</section>

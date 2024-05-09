@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
@@ -12,14 +13,38 @@ export class LoginComponent implements OnInit {
 
   mail: string = ""
   password: string = ""
-  //User שליפת טבלת
 
+  myForm: FormGroup = new FormGroup({})
 
   constructor(public userService: UserService, public route: Router) { }
 
   ngOnInit(): void {
+    //שליפת כל המשתמשים
     this.getAllUsers();
+    //טעינת הטופס
+    this.startForm()
 
+  }
+  //אתחול משתנה הטופס
+  startForm() {
+
+    this.myForm = new FormGroup({
+
+      //בדיקת תקינות מייל
+      email: new FormControl(this.mail, [Validators.required,
+      Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
+
+      //בדיקת תקינות סיסמה
+      password: new FormControl(this.password, [Validators.required,
+      Validators.minLength(2)])
+    })
+  }
+  // עבור כל שדה get  פונקציות 
+  get gEmail() {
+    return this.myForm.controls['email']
+  }
+  get gPassword() {
+    return this.myForm.controls['password']
   }
 
   //users
@@ -33,37 +58,49 @@ export class LoginComponent implements OnInit {
   }
 
   save() {
-    console.log('mail: ' + this.mail, 'password: ' + this.password);
+    console.log('mail: ' + this.myForm.value['email'], 'password: ' + this.myForm.value['password']);
 
-    this.userService.GetByMailAndPassword(this.mail, this.password)
-      .then((user: User) => {
+    this.userService.GetByMailAndPassword(this.myForm.value['email'], this.myForm.value['password']).subscribe(
+      user => {
         console.log('User found:', user);
         //בדיקה האם המשתמש קיים לפי האמייל והסיסמה
         if (user != null) {
           //בדיקה האם זה המנהל
           var x = localStorage.getItem('manager')
-          debugger
           if (x == JSON.stringify(user)) {
             console.log('מנהל');
-            // alert('מנהל');
+            sessionStorage.setItem('isManager',true.toString())
+            this.userService.manager=sessionStorage.getItem('isManager')=== 'true';
+            // this.userService.manager = true
           }
-          else {
-            console.log(x);
+          else
+          {
             console.log('לא מנהל');
-            // alert('מנהל לא');
-
-            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            sessionStorage.setItem('isManager',false.toString())
+            this.userService.manager=sessionStorage.getItem('isManager')=== 'true';
+            // this.userService.manager = false
           }
+
+          // sessionStorage שמירת המשתמש הנוכחי ב
+          sessionStorage.setItem('currentUser', JSON.stringify(user));
+          // service שמירת המשתמש הנוכחי ב
+          this.userService.currencyUser = user;
+
           this.route.navigate(['./ourTrips'])
 
         }
         else
           alert('משתמש זה אינו קיים');
-
-      })
-      .catch(error => {
+      },
+      error => {
         alert('error');
-      });
+      }
+
+    );
+
+    //ריקון הטופס
+    this.startForm()
   }
+
 
 }

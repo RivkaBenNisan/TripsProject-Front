@@ -6,19 +6,25 @@
 </label> -->
 
 
-
 <div class="container">
+    <h1 id="name" *ngIf="userService.currencyUser">{{ userService.currencyUser.firstName + ' ' + userService.currencyUser.lastName }}</h1>
     <nav>
         <ul>
-            <a routerLink="./home"><li>דף הבית</li></a>
-            <a routerLink="./login"><li>כניסה</li></a>
-            <a routerLink="./register"><li>הרשמה</li></a>
-            <a routerLink="./ourTrips"><li>הטיולים שלנו</li></a>
+           
+            <a routerLink="./login"><li class="route">כניסה</li></a>
+            <a *ngIf="userService.manager==false" routerLink="./register/new"><li class="route">הרשמה</li></a>
+            <a *ngIf="userService.manager==false" routerLink="./home" ><li class="route">
+                <img src='../assets/image/logo.png' id="pic">
+                </li></a>
+            <a routerLink="./ourTrips"><li class="route">הטיולים שלנו</li></a>
+            <a *ngIf="userService.currencyUser && userService.manager==false" routerLink="./personal"><li class="route">איזור אישי</li></a>
+            <a *ngIf="userService.manager==true" routerLink="./users"><li class="route">המשתמשים שלנו</li></a>
+           
         </ul>
-<!-- מציג תמיד -->
-        <!-- <h1 id="name" *ngIf="currencyUser.firstName==undefined">{{ currencyUser.firstName + ' ' + currencyUser.lastName }}</h1> -->
-        <h1 id="name" *ngIf="currencyUser">{{ currencyUser.firstName + ' ' + currencyUser.lastName }}</h1>
+        
     </nav>
+
 
 </div>
 <router-outlet></router-outlet>
+

@@ -1,0 +1,53 @@
+<section>
+    <div class="login-container">
+        <br>
+        <br>
+
+        <h2 id="yhad">{{ourTripsService.currentTrip?.yhad}}</h2>
+        <br>
+        <br>
+        <img src="../assets/image/{{ourTripsService.currentTrip?.picture}}.jpg" class="myPic">
+        <br>
+        <br>
+
+        <h2>סוג הטיול: {{ourTripsService.currentTrip?.tripTypeName}}</h2>
+        <h2>:הטיול יתקיים</h2>
+        <h2>בתאריך: {{ourTripsService.currentTrip?.tripDate}}</h2>
+        <h2>בשעה 00 :{{ourTripsService.currentTrip?.tripTime}}</h2>
+        <h2>למשך {{ourTripsService.currentTrip?.tripDuration}} שעות</h2>
+        <!-- <h2>נותרו {{ourTripsService.currentTrip?.tripEmptyPlace}} מקומות</h2> -->
+        <!-- <h2>נותרו {{ourTripsService.currentTrip?.tripEmptyPlace!-ourTripsService.amount}} מקומות</h2> -->
+        <h2>נותרו {{num}} מקומות</h2>
+        <h2> ₪ {{ourTripsService.currentTrip?.price}}</h2>
+
+        <button type="button" value="submit" (click)="openShow()">להזמנת מקומות</button>
+
+
+
+
+        <div class="modal-background" *ngIf="show == true">
+            <div class="place">
+                <button class="close-button" id="closeShow" (click)="closeShow()">X</button>
+
+                <div class="place">
+
+                    <div class="input-box">
+                        <!-- <span class="icon">
+                            <img src='../assets/image/mail.png' id="pic">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span> -->
+
+                        <input type="number" id="place" required name="place" [(ngModel)]="ourTripsService.amount">
+                        <label id="myPlace" for="place">הכנס מספר מקומות רצוי</label>
+
+                        <button type="button" value="submit" (click)="inviteTrip()">לאישור ההזמנה</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>

@@ -1,1 +1,122 @@
-<p>our-trips works!</p>
+<!-- <section> -->
+
+
+
+
+
+<!-- <div *ngFor="let t of ourTripsService.allTrips">
+            <div class="login-container"
+                *ngIf="tripHasNotPassed(t.tripDate!) &&(!currentTypeTrip || t.tripTypeId==currentTypeTrip)">
+                <h2>{{t.yhad}}</h2>
+                <h2>{{t.tripDate}}</h2>
+
+                <button type="submit" value="submit" (click)="submitTrip(t)">שליחה</button>
+
+            </div>
+        </div> -->
+
+<!-- </section> -->
+
+
+
+
+
+
+<div id="mySelect">
+
+    
+    <!-- כפתור להוספת טיול -->
+    <button id="addButton" *ngIf="userService.manager==true" class="link" type="button" value="addTrip" (click)="addTrip()">הוספת טיול </button>
+
+    <!--בחירת סוג הטיול -->
+    <select name="select" id="select" [(ngModel)]="currentTypeTrip">
+        <option value="0" selected><em>בחירת סוג הטיול</em></option>
+        <option *ngFor="let t of typeTripsService.allTypeTrip" [value]="t.typeId">
+            {{t.typeName}}
+        </option>
+    </select>
+<br>
+<br>
+
+
+    <!-- סינון לפי תאריך -->
+
+    <label *ngIf="userService.manager==true" class="container" for="noFilter" id="noFilterLabel">ללא סינון
+        <input type="checkbox" id="noFilter" [checked]="allTrip" (change)="toggleTripFilter('all')">
+        <div class="checkmark" id="noFilterCheckmark"></div>
+    </label>
+
+    <label *ngIf="userService.manager==true" class="container" for="fromPast" id="fromPastLabel">טיולים מהעבר
+        <input type="checkbox" id="fromPast" [checked]="past" (change)="toggleTripFilter('past')">
+        <div class="checkmark" id="fromPastCheckmark"></div>
+    </label>
+
+    <label *ngIf="userService.manager==true" class="container" for="futureTrips" id="futureTripsLabel">טיולים עתידיים
+        <input type="checkbox" id="futureTrips" [checked]="future" (change)="toggleTripFilter('future')">
+        <div class="checkmark" id="futureTripsCheckmark"></div>
+    </label>
+
+    <label *ngIf="userService.manager==true" class="container" for="todayTrips" id="todayTripsLabel">טיולי היום
+        <input type="checkbox" id="todayTrips" [checked]="todayTrips" (change)="toggleTripFilter('todayTrips')">
+        <div class="checkmark" id="todayTripsCheckmark"></div>
+    </label>
+
+    <label *ngIf="userService.manager==true" class="container" for="weekTrips" id="weekTripsLabel">טיולי השבוע
+        <input type="checkbox" id="weekTrips" [checked]="week" (change)="toggleTripFilter('week')">
+        <div class="checkmark" id="weekTripsCheckmark"></div>
+    </label>
+
+
+    <label *ngIf="userService.manager==true" class="container" for="monthTrips" id="monthTripsLabel">טיולי החודש
+        <input type="checkbox" id="monthTrips" [checked]="month" (change)="toggleTripFilter('month')">
+        <div class="checkmark" id="monthTripsCheckmark"></div>
+    </label>
+
+</div>
+
+<body>
+
+    <div *ngFor="let t of ourTripsService.allTrips">
+        <div class="card" *ngIf="(userService.manager==true || tripHasNotPassed(t.tripDate!)) && 
+        (currentTypeTrip==0 || t.tripTypeId == currentTypeTrip) &&
+        ((userService.manager &&
+        (!future || futureTrip(t.tripDate!)) && 
+        (!past || pastTrip(t.tripDate!)) &&
+        (!todayTrips || todayTrip(t.tripDate!)) &&
+        (!week || weekTrip(t.tripDate!)) &&
+        (!month || monthTrip(t.tripDate!))
+        ) || userService.manager==false)"
+        [ngClass]="{'isCancel' : (userService.manager==false && isInvent(t.tripId!)==true)}">
+            <div class="profile-pic">
+                <img src="../assets/image/{{t.picture}}.jpg" alt="Profile Pic">
+            </div>
+
+            <div id="details">
+                <div class="content">
+                    <h2>{{t.yhad}}</h2>
+                    <p class="tag">{{t.tripTypeName}}</p>
+                    <h6 *ngIf="t.isFirstAid==false && userService.manager==true" class="about">יש צורך בחובש ✡️</h6>
+                    <p class="about">{{t.tripDate | date: 'dd/MM/yyyy' }} </p>
+                   
+                    
+
+                </div>
+
+                <div class="buttons">
+                    <!-- <a href="" class="link" >לפרטים <i class="fa-solid fa-up-right-from-square"></i></a> -->
+                    <button *ngIf="userService.manager==false" class="link" type="submit" value="submit" (click)="submitTrip(t)">לפרטים </button>
+                    <button *ngIf="userService.manager==true" class="link" type="submit" value="submit" (click)="edit(t)">לעריכה </button>
+                    <button *ngIf="userService.manager==true" class="link" type="submit" value="submit" (click)="showInvitations(t)">לצפיה בהזמנות </button>
+
+
+                    <!-- כפתור להסרה רק לטיולים שהזמנתי להם מקומות -->
+                    <button *ngIf="userService.manager==false && isInvent(t.tripId!)" class="link" type="submit" value="submit"
+                        (click)="allInvitationToTrip(t.tripId!)">ביטול
+                        הזמנה</button>
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>

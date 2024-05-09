@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a::after {
+    content: "";
+}
+
+a:hover::after {
+    display: block;
+    border: 1px solid white;
+    animation: under-line .5s ease-in-out 1;
+}
+
+@keyframes under-line {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Background picture */
+    background: url("/assets/image/sky.png") no-repeat;
+    background-size: cover;
+    color: #0500a0;
+}
+
+.login-container {
+    height: 900px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+    border: 1px white solid;
+    border-radius: 20px;
+    margin-bottom: 125px;
+    margin-top: 100px;
+    border: 3px #0500a0 solid;
+    border-radius: 20px;
+    margin-right: 40px;
+    margin-left: 70px;
+}
+
+h2 {
+    font-size: 1.75em;
+    margin: 0 0 20px;
+}
+
+.input-box {
+    position: relative;
+    border-bottom: 2px solid white;
+    margin: 30px 0;
+    width: 310px;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1em;
+    transition: .5s;
+}
+
+.input-box input:valid~label,
+.input-box input:focus~label {
+    top: -5px;
+}
+
+.input-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+    height: 50px;
+    font-size: 1em;
+    padding: 0 40px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.4em;
+    line-height: 45px;
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    width: 310px;
+    margin: 0 0 20px;
+}
+
+button {
+    height: 40px;
+    width: 310px;
+    border-radius: 20px;
+    margin: 0 0 10px;
+    outline: none;
+    border: none;
+    background: #0500a0;
+    color: white;
+    transition: .3s;
+    font-size: 25px;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, .8);
+    color: #0500a0;
+}
+
+.create-account {
+    margin: 12px 0 0 0;
+}
+
+@media screen and (max-width: 360px) {
+    .login-container {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: none;
+    }
+}
+
+/* כיתוב הטופס */
+img {
+    width: 400px;
+}
+
+.myPic {
+    border-radius: 30px;
+    /* Adds round edges to the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Adds a subtle shadow effect */
+    transition: box-shadow 0.3s, filter 0.3s, transform 0.3s;
+    /* Smooth transition for hover effect */
+}
+
+.myPic:hover {
+    filter: brightness(70%);
+    /* Darkens the image when hovered */
+    transform: scale(1.1);
+}
+
+#yhad {
+    text-align: center;
+    font-size: 3.75em;
+    margin: 0 0 20px;
+    filter: drop-shadow(0 6px 2px black);
+    -webkit-text-stroke: 1px white;
+    color: black;
+}
+
+/* פתיחת דיה ההזמנות */
+/* #place {
+    color: blue;
+}
+
+.place {
+    color: blue;
+    background-color: #45aef4;
+}
+
+#pic {
+    width: 30px;
+}
+#myPlace{
+    color: #fff;
+} */
+
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent dark background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.place {
+    color: blue;
+    background-color: #45aef4;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+    /* Ensure button is above other elements */
+}
+
+#place {
+    color: blue;
+}
+
+#pic {
+    width: 30px;
+}
+
+#myPlace {
+    color: #fff;
+}
+
+#closeShow {
+    width: 20px;
+    background-color: #45aef4;
+}
+
+.close-button:hover {
+    color: red;
+    /* Change color to red on hover */
+}

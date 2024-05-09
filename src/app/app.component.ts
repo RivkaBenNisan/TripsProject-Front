@@ -10,57 +10,31 @@ import { User } from './classes/user';
 })
 export class AppComponent implements OnInit {
   title = 'MyAngularApp';
-  currencyUser: User = new User()
   manager: User = new User()
 
-  constructor() {}
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
-    debugger
     const managerData = localStorage.getItem('manager');
     if (managerData) {
       this.manager = JSON.parse(managerData);
     }
 
+
     const currentUserData = sessionStorage.getItem('currentUser');
     if (currentUserData) {
-      this.currencyUser = JSON.parse(currentUserData);
+      this.userService.currencyUser = JSON.parse(currentUserData);
+      // בדיקה האם המנהל נמצא ואם כן נשמור במשתנה בסרויס שהוא נמצא
+      this.userService.manager = sessionStorage.getItem('isManager') === 'true';
     }
 
-    console.log(this.manager, this.currencyUser);
+    console.log(this.manager, this.userService.currencyUser);
 
-    if (this.manager.userId === this.currencyUser.userId) {
+    if (this.manager.userId === this.userService.currencyUser?.userId) {
       console.log('Manager');
-      
-      // alert('Manager');
+
     } else {
       console.log('Not a manager');
-      // alert('Not a manager');
     }
   }
 }
-  //users
-
-  // getAllUsers() {
-  //   this.userService.getAllUsers()
-  // }
-
-  // GetByMailAndPasword(email: string, password: string) {
-  //   this.userService.GetByMailAndPasword(email, password)
-  // }
-
-
-  //TypeTrip שליפת טבלת
-
-  // constructor(public TypeTripService: TypeTripService) { }
-  // ngOnInit(): void {
-  //   this.TypeTripService.getAll().subscribe(
-  //     success => {
-  //       alert("כל הכבוד!");
-  //       this.TypeTripService.allTypeTrip = success
-  //     },
-  //     error => { alert("שגיאהההה") }
-  //   )
-  // }
-
-

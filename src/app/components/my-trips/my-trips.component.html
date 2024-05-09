@@ -1,0 +1,96 @@
+<div id="mySelect">
+    <!-- סינון לפי סוג הטיול -->
+    <select name="select" id="select" [(ngModel)]="currentTypeTrip">
+        <option value="0" selected><em>בחירת סוג הטיול</em></option>
+        <option *ngFor="let t of typeTripsService.allTypeTrip" [value]="t.typeId">
+            {{t.typeName}}
+        </option>
+    </select>
+
+
+    <!-- סינון לפי תאריך -->
+
+    <div class="container">
+
+        <h2>סינון לפי תאריך</h2>
+
+        <ul>
+            <li>
+                <input type="radio" id="f-option" name="selector" checked (click)="allTripFunc()">
+                <label for="f-option">ללא סינון</label>
+
+                <div class="check"></div>
+            </li>
+
+            <li>
+                <input type="radio" id="s-option" name="selector" (click)="futureFunc()">
+                <label for="s-option">טיולים מהעבר</label>
+
+                <div class="check">
+                    <div class="inside"></div>
+                </div>
+            </li>
+
+            <li>
+                <input type="radio" id="t-option" name="selector" (click)="pastFunc()">
+                <label for="t-option">טיולים עתידיים</label>
+
+                <div class="check">
+                    <div class="inside"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <!-- סינון לפי מחיר -->
+
+    <mat-card class="example-result-card">
+        <mat-card-content>
+            <h2>טווח מחירים</h2>
+
+            <div class="example-label-container">
+                <label id="example-name-label" class="example-name-label">{{minPrice}}</label>
+                <label id="example-name-label" class="max example-name-label">{{maxPrice}}</label>
+            </div>
+            <mat-slider class="example-margin" [disabled]="disabled" [max]="max" [min]="min" [step]="step"
+                [showTickMarks]="showTicks">
+                <input value="300" [(ngModel)]="minPrice" #slider matSliderStartThumb />
+                <input value="400" [(ngModel)]="maxPrice" #slider2 matSliderEndThumb />
+            </mat-slider>
+        </mat-card-content>
+    </mat-card>
+
+</div>
+
+
+<body>
+
+    <div *ngFor="let t of ourTripsService.allMyTrips">
+        <!--  סינון לפי סוג הטיול ולפי התאריך שסומן -->
+        <div class="card" *ngIf="(currentTypeTrip==0 || t.tripTypeId == currentTypeTrip) && 
+        (!future || futureTrip(t.tripDate!)) && 
+        (!past || pastTrip(t.tripDate!)) && (t.price!>minPrice && t.price!<maxPrice)">
+            <div class="profile-pic">
+                <img src="../assets/image/{{t.picture}}.jpg" alt="Profile Pic">
+            </div>
+
+            <div id="details">
+                <div class="content">
+                    <h2>{{t.yhad}}</h2>
+                    <p class="tag">{{t.tripTypeName}}</p>
+                    <p class="about">{{t.tripDate | date: 'dd/MM/yyyy' }} </p>
+                </div>
+
+                <div class="buttons">
+                    <!-- כפתור להסרה רק לטיולים שעדיין לא התקיימו -->
+                    <button *ngIf="pastTrip(t.tripDate!)" class="link" type="submit" value="submit"
+                        (click)="allInvitationToTrip(t.tripId!)">למחיקת
+                        ההזמנה</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>

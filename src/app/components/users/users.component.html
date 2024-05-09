@@ -1,0 +1,25 @@
+<body>
+
+    <div *ngFor="let u of userService.allUsers">
+        <!-- שליפת כל המשתמשים מלבד המנהל -->
+        <div *ngIf="!(manager.email==u.email && manager.password==u.password)" class="card">
+            <div class="profile-pic">
+                <img src="../assets/image/profil2.png" alt="Profile Pic">
+            </div>
+
+            <div id="details">
+                <div class="content">
+                    <h2>{{u.firstName}} {{u.lastName}}</h2>
+                    <p class="tag">{{u.phone}}</p>
+                    <p class="tag">{{u.email}}</p>
+                    <h6 *ngIf="u.isFirstAid==false" class="about">אינו חובש/ת 🚑</h6>
+                    <h6 *ngIf="u.isFirstAid==true" class="about">חובש/ת 🚑</h6>
+                    <!-- <p class="about">{{u.tripDate | date: 'dd/MM/yyyy' }} </p> -->
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>

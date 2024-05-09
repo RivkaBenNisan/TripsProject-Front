@@ -1,0 +1,25 @@
+<body>
+
+    <div *ngFor="let i of ourTripService.allInvitationByTripId">
+        <div class="card">
+            <div class="profile-pic">
+                <img src="../assets/image/profil2.png" alt="Profile Pic">
+            </div>
+
+            <div id="details">
+                <div class="content">
+                    <h2>{{i.invitationUserName}}</h2>
+                    <p class="tag">{{i.invitationTripYhad}} </p>
+                    <p class="tag">:ההזמנה בוצעה</p>
+                    <p class="tag">בשעה 00 :{{i.invitationTime}}</p>
+                    <p class="tag">{{i.invitationDate | date: 'dd/MM/yyyy' }}</p>
+                    <p class="tag">מקומות {{i.placeNumber}} </p>
+                    <!-- <p class="about">{{u.tripDate | date: 'dd/MM/yyyy' }} </p> -->
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>

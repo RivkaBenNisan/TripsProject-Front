@@ -13,33 +13,48 @@
 
 
 <section>
+    <!-- <img src="../assets/image/sky.png" alt="Sky Image"> -->
     <div class="login-container">
+
         <h2>כניסה</h2>
 
-        <form (ngSubmit)="save()" #myForm="ngForm">
+        <form [formGroup]="myForm" (ngSubmit)="save()">
+
+            <!-- email -->
             <div class="input-box">
                 <span class="icon">
                     <img src='../assets/image/mail.png' id="pic">
-                    <i class="fa-solid fa-envelope"></i>
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
                 </span>
 
-                <input type="text" id="email"  [(ngModel)]="mail" name="email" required>
+                <input formControlName="email" type="text" id="email" required name="r">
                 <label for="email">מייל</label>
             </div>
-
+            <div id="error" *ngIf="gEmail.invalid &&(gEmail.touched || gEmail.dirty)">
+                <p *ngIf="gEmail.errors!['pattern']">כתובת האימייל שגויה</p>
+                <p *ngIf="gEmail.errors!['required']">שדה חובה</p>
+            </div>
+            <!-- password -->
             <div class="input-box">
                 <span class="icon">
                     <img src='../assets/image/password.png' id="pic">
-                    <i class="fa-solid fa-lock"></i>
+                    <!-- <i class="fa-solid fa-lock"></i> -->
                 </span>
 
-                <input required type="password" id="pw" [(ngModel)]="password" name="p">
+                <input formControlName="password" required type="password" id="pw" name="p">
                 <label for="pw">סיסמה</label>
+            </div>
+            <div id="error" *ngIf="gPassword.invalid &&(gPassword.touched || gPassword.dirty)">
+                <p *ngIf="gPassword.errors!['minlength']">סיסמה חלשה</p>
+                <p *ngIf="gPassword.errors!['required']">שדה חובה</p>
             </div>
 
 
-            <!-- <input type="submit" value="Submit" id="submit"> -->
-             <button type="submit" value="submit" [disabled]="!myForm.valid">שליחה</button>
+            <button type="submit" [style.background-color]="myForm.valid ? '#0500a0' : '#0500a00d'"
+            [style.cursor]="myForm.valid ? 'pointer' : 'not-allowed'"
+            [disabled]="!myForm.valid" value="submit" id="submitBtn">שליחה</button>
+
+
         </form>
     </div>
 </section>

@@ -1,1 +1,119 @@
-<p>register works!</p>
+<body>
+    <br>
+    <br>
+    <br>
+
+<button *ngIf="status=='old'" id="deleteUser" (click)="deleteUser()" value="delete">להסרה מהאתר</button>
+
+<section>
+    <div class="login-container">
+        <h2>הרשמה</h2>
+
+        <form [formGroup]="myForm" (ngSubmit)="save()">
+
+
+            <!-- firstName -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/name.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="firstName" type="text" id="firstName" name="firstName" required>
+                <label for="firstName">שם פרטי</label>
+            </div>
+            <div id="error" *ngIf="gFirstName.invalid &&(gFirstName.touched || gFirstName.dirty)">
+                <p *ngIf="gFirstName.errors!['minlength']">שם קצר מידי</p>
+                <p *ngIf="gFirstName.errors!['maxlength']">ארוך מידי</p>
+                <p *ngIf="gFirstName.errors!['required']">שדה חובה</p>
+                <p *ngIf="gFirstName.errors!['pattern']">בעברית בלבד</p>
+            </div>
+
+
+            <!-- lastName -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/name.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="lastName" type="text" id="lastName" name="lastName" required>
+                <label for="lastName">שם משפחה</label>
+            </div>
+            <div id="error" *ngIf="gLastName.invalid &&(gLastName.touched || gLastName.dirty)">
+                <p *ngIf="gLastName.errors!['minlength']">קצר מידי</p>
+                <p *ngIf="gLastName.errors!['maxlength']">ארוך מידי</p>
+                <p *ngIf="gLastName.errors!['required']">שדה חובה</p>
+                <p *ngIf="gLastName.errors!['pattern']">בעברית בלבד</p>
+            </div>
+
+
+
+            <!-- phone -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/phone.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="phone" type="text" id="phone" name="phone" required>
+                <label for="phone">פלאפון</label>
+            </div>
+            <div id="error" *ngIf="gPhone.invalid &&(gPhone.touched || gPhone.dirty)">
+                <!-- <p *ngIf="gPhone.errors!['minlength']">פלאפון לא תקין</p>
+                    <p *ngIf="gPhone.errors!['maxlength']">ארוך מידי</p> -->
+                <p *ngIf="gPhone.errors!['pattern']">פלאפון שגוי</p>
+                <p *ngIf="gPhone.errors!['required']">שדה חובה</p>
+            </div>
+
+
+            <!-- email -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/mail.png' id="pic">
+                    <!-- <i class="fa-solid fa-envelope"></i> -->
+                </span>
+
+                <input formControlName="email" type="text" id="email" name="email" required>
+                <label for="email">מייל</label>
+            </div>
+            <div id="error" *ngIf="gEmail.invalid &&(gEmail.touched || gEmail.dirty)">
+                <p *ngIf="gEmail.errors!['pattern']">כתובת האימייל שגויה</p>
+                <p *ngIf="gEmail.errors!['required']">שדה חובה</p>
+            </div>
+
+
+            <!-- password -->
+            <div class="input-box">
+                <span class="icon">
+                    <img src='../assets/image/password.png' id="pic">
+                    <!-- <i class="fa-solid fa-lock"></i> -->
+                </span>
+
+                <input formControlName="password" required type="password" id="pw" name="p">
+                <label for="pw">סיסמה</label>
+            </div>
+            <div id="error" *ngIf="gPassword.invalid &&(gPassword.touched || gPassword.dirty)">
+                <p *ngIf="gPassword.errors!['minlength']">סיסמה חלשה</p>
+                <p *ngIf="gPassword.errors!['required']">שדה חובה</p>
+            </div>
+
+            <!-- isFirstAid  -->
+            <label class="container" for="isFirstAid" id="firstAid">?האם יש לך תעודת עזרה ראשונה
+                <input type="checkbox" id="isFirstAid" formControlName="isFirstAid">
+                <div class="checkmark" id="checkbox"></div>
+            </label>
+            <br>
+            <br>
+            <br>
+
+
+            <!-- <input type="submit" value="Submit" id="submit"> -->
+                <button type="submit" [style.background-color]="myForm.valid ? '#0500a0' : '#0500a00d'"
+                [style.cursor]="myForm.valid ? 'pointer' : 'not-allowed'"
+                [disabled]="!myForm.valid" value="submit" id="submitBtn">שליחה</button>
+        </form>
+    </div>
+
+</section>
+</body>

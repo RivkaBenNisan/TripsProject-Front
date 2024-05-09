@@ -9,10 +9,16 @@ import { TypeTrip } from '../classes/typeTrip';
 export class TypeTripService {
 
   constructor(public http:HttpClient) { }
+  currentTypeTrip: TypeTrip | undefined = undefined;
+  basicUrl: string = 'https://localhost:7056/api/TypeTrip'
   allTypeTrip:Array<TypeTrip>=new Array<TypeTrip>()
 
-  getAll():Observable<Array<TypeTrip>>
-  {
-    return this.http.get<Array<TypeTrip>>('https://localhost:7056/api/TypeTrip')
+  getAllTypeTrips():Observable<Array<TypeTrip>> {
+    return this.http.get<Array<TypeTrip>>(this.basicUrl);
+  }
+
+  addTypeTrip(typeTrip: TypeTrip ):Observable<number>{
+    return this.http.post<number>(this.basicUrl, typeTrip)
+
   }
 }

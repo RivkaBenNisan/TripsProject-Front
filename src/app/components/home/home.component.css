@@ -1,0 +1,269 @@
+body{
+    height:100vh ;
+}
+ /*--------------COLLAGE------------*/
+.collage{
+text-align: center;
+color: #fff;
+overflow: hidden;
+background: url('https://images.unsplash.com/photo-1580349047456-d5affa209410?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+padding-bottom: 350px;
+padding-top: 350px;
+position: relative;
+}
+
+.collage span{
+font-size: 60px;
+}
+.collage .text-sm{
+font-size: 17px;
+width: 100%;
+padding: 0 29%;
+}
+
+.img-thumbnail {
+padding: 0.25rem;
+background-color: #fff;
+border: 1px solid #dee2e6;
+border-radius: 0.25rem;
+max-width: 100%;
+height: auto;}
+
+.collage img{
+width: 250px;
+
+}
+.collage .img-1{
+position: absolute;
+top: 100px;
+left: 98px;
+transform: rotate(35deg);
+
+}
+.img-1.active{
+animation: animation1 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-2{
+position: absolute;
+top: 0;
+left: 27%;
+transform: rotate(10deg);
+
+}
+.img-2.active{
+animation: animation2 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-3{
+position: absolute;
+top: 125px;
+right: 160px;
+transform: rotate(-35deg);
+}
+.img-3.active{
+animation: animation3 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-4{
+position: absolute;
+bottom: 0px;
+left: 115px;
+transform: rotate(-35deg);
+}
+.img-4.active{
+animation: animation4 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-5{
+position: absolute;
+bottom: 0;
+left: 45%;
+transform: rotate(-12deg);
+}
+.img-5.active{
+animation: animation5 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-6{
+z-index: 1;
+position: absolute;
+bottom: 0;
+right: 240px;
+transform: rotate(35deg);
+}
+.img-6.active{
+animation: animation6 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-7{
+position: absolute;
+bottom: 28%;
+left: 9%;
+transform: rotate(11deg);
+}
+.img-7.active{
+animation: animation7 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-8{
+position:  absolute;
+bottom: 23%;
+right: 10%;
+transform: rotate(-16deg);
+}
+.img-8.active{
+animation: animation8 1.5s ease-in-out 0s 1 ;
+}
+.collage .img-9{
+position:  absolute;
+top: 5%;
+right: 23%;
+transform: rotate(-16deg);
+}
+.img-9.active{
+animation: animation8 1.5s ease-in-out 0s 1 ;
+}
+
+@keyframes animation1 {
+0% {
+    opacity: 0;
+    transform: translate(190%,70%) rotate(-200deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(35deg);
+}
+}
+
+@keyframes animation2 {
+0% {
+    opacity: 0;
+    transform: translate(0%,70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(10deg);
+}
+}
+
+@keyframes animation3 {
+0% {
+    opacity: 0;
+    transform: translate(-190%,70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(-35deg);
+}
+}
+@keyframes animation4 {
+0% {
+    opacity: 0;
+    transform: translate(190%,-70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(-35deg);
+}
+}
+@keyframes animation5 {
+0% {
+    opacity: 0;
+    transform: translate(0%,-70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(-12deg);
+}
+}
+@keyframes animation6 {
+0% {
+    opacity: 0;
+    transform: translate(-190%,-70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(35deg);
+}
+}
+@keyframes animation7 {
+0% {
+    opacity: 0;
+    transform: translate(-190%,-70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(11deg);
+}
+}
+@keyframes animation8 {
+0% {
+    opacity: 0;
+    transform: translate(-190%,-70%) rotate(-360deg);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0) rotate(-16deg);
+}
+}
+@media all and (max-width:1024px){
+.collage .img-1{
+left:0;
+}
+.collage .img-7,.collage .img-4{
+left:-70px;
+}
+.collage .img-8,.collage .img-6,.collage .img-3{
+right: -90px;
+}
+}
+@media all and (max-width:768px){
+.collage .img-1{
+top:-25px;
+left: -40px;
+}
+.collage .img-2{
+top:-75px;
+left:185px;
+}
+.collage .img-9{
+top:-85px;
+right:165px;
+}
+.collage .img-5,.collage .img-9{
+top:-85px;
+right: -45px;
+}
+.collage .img-7{
+top:170px;
+}
+.collage .img-4{
+transform: rotate(10deg);
+top:160px;
+left:160px;
+
+}
+.collage .img-6{
+top: 160px;
+right: 135px;
+transform: rotate(-10deg);
+}
+.collage .img-8{
+display:none;
+}
+.p-tb350{
+padding-top: 480px;
+padding-bottom: 50px;
+}
+}
+@media all and (max-width:480px){
+.slide-right{
+animation: none;
+}
+
+}
