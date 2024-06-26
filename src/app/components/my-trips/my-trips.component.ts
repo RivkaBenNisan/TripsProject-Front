@@ -13,14 +13,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-trips.component.css',]
 })
 export class MyTripsComponent implements OnInit {
-  ngOnInit(): void {
-    debugger
-    this.currentUser = this.userService.currencyUser?.userId;
-
-    this.GetUserTripsById(this.currentUser!)
-    //שליפת כל סוגי הטיולים
-    this.getAllTypeTrips()
-  }
 
   //הטיול הנוכחי
   currentTrip: OurTrips = new OurTrips()
@@ -40,6 +32,16 @@ export class MyTripsComponent implements OnInit {
   constructor(public userService: UserService, public ourTripsService: OurTripsService, public typeTripsService: TypeTripService, public invitationService: InvitationService) { }
 
 
+  ngOnInit(): void {
+    debugger
+    this.currentUser = this.userService.currencyUser?.userId;
+
+    this.GetUserTripsById(this.currentUser!)
+    //שליפת כל סוגי הטיולים
+    this.getAllTypeTrips()
+  }
+
+
   //המשתמש הנוכחי
   currentUser: number | undefined = 0
   //כל הטיולים שהמשתמש נרשם אליהם
@@ -48,7 +50,14 @@ export class MyTripsComponent implements OnInit {
   // type trip
   getAllTypeTrips() {
     debugger
-    this.typeTripsService.getAllTypeTrips()
+    this.typeTripsService.getAllTypeTrips().subscribe(
+      success => {
+        this.typeTripsService.allTypeTrip = success
+      },
+      error => {
+        alert("שגיאה בהבאת כל סוגי הטיולים")
+      }
+    )
   }
 
   // ללא סינון
@@ -127,12 +136,10 @@ export class MyTripsComponent implements OnInit {
       this.invitationService.deleteInvitation(this.invitationsToTrip[this.index as number].invitationId!).subscribe(
         succses => {
           debugger
-          if (succses == true)
-            {
-            alert("ההזמנה בוטלה")
+          if (succses == true) {
             // נפעיל שוב את הפונקציה שמביאה את כל הטיולים למשתמש
             this.GetUserTripsById(this.userService.currencyUser?.userId!)
-            }
+          }
           else
             alert("לא ניתן לבטל הזמנה עבור טיול שכבר חלף התאריך שלו")
         },

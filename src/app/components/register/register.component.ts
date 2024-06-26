@@ -112,7 +112,11 @@ export class RegisterComponent implements OnInit {
 
   save() {
     //אם זה הוספת משתמש
+    debugger
     if (this.status == 'new') {
+      // אם הוא לא חובש
+      if (this.currntUser.isFirstAid == null)
+        this.currntUser.isFirstAid = false
 
       this.currntUser = this.myForm.value;
       console.log('mail: ' + this.currntUser.email, 'password: ' + this.currntUser.password);
@@ -180,9 +184,9 @@ export class RegisterComponent implements OnInit {
         if (success == true) {
           sessionStorage.clear()
           this.userService.currencyUser = undefined
-          this.currntUser=new User()
+          this.currntUser = new User()
           this.startForm()
-          alert("הוסרת בהצלחה מהאתר")
+          this.route.navigate(['./ourTrips'])
         }
         else
           alert("פעולה זו אינה חוקית כיוון שיש לך הזמנות עתידיות")

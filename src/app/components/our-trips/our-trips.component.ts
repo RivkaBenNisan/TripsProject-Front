@@ -45,7 +45,14 @@ export class OurTripsComponent implements OnInit {
   }
   // type trip
   getAllTypeTrips() {
-    this.typeTripsService.getAllTypeTrips()
+    this.typeTripsService.getAllTypeTrips().subscribe(
+      success=>{
+        this.typeTripsService.allTypeTrip=success
+      },
+      error=>{
+        alert("שגיאה בהבאת כל סוגי הטיולים")
+      }
+    )
   }
 
   //service בעת לחיצה על פרטי הטיול נשמור אותו המשתנה ב 
@@ -127,7 +134,7 @@ export class OurTripsComponent implements OnInit {
   weekTrip(date: Date): boolean {
     const currentDate = new Date();
     const nextWeekDate = new Date();
-    nextWeekDate.setDate(currentDate.getDate() + 6); // Calculate the date 6 days from today
+    nextWeekDate.setDate(currentDate.getDate() + 7); // Calculate the date 6 days from today
     const tripDateTime = new Date(date);
     return tripDateTime >= currentDate && tripDateTime <= nextWeekDate || this.todayTrip(date);
   }
@@ -181,7 +188,6 @@ export class OurTripsComponent implements OnInit {
         succses => {
           debugger
           if (succses == true) {
-            alert("ההזמנה בוטלה")
             // נפעיל שוב את הפונקציה שמביאה את כל הטיולים 
             this.getAllTrips()
             // נפעיל שוב את הפונקציה שמביאה את כל הטיולים שהמשתמש הזמין

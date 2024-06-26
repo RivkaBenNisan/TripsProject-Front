@@ -56,7 +56,7 @@ export class AddTripComponent implements OnInit {
   getAllTypeTrips() {
     this.typeTripsService.getAllTypeTrips().subscribe(
       success => { this.typeTripsService.allTypeTrip = success; },
-      error => { alert("שגיאה") }
+      error => { alert("שגיאה בהבאת כל סוגי הטיולים") }
     )
   }
 
@@ -165,7 +165,7 @@ export class AddTripComponent implements OnInit {
           if (newCodeTrip > 0) {
             this.currentTrip.tripId = newCodeTrip
             // this.ourTripService.currentTripManager!.tripId = newCodeTrip
-            alert("הטיול נוסף בהצלחה")
+            // alert("הטיול נוסף בהצלחה")
             this.route.navigate(['./ourTrips'])
 
 
@@ -185,7 +185,7 @@ export class AddTripComponent implements OnInit {
       this.ourTripService.UpdateTrip(this.currentTrip).subscribe(
         success => {
           if (success == true) {
-            alert("הטיול עודכן בהצלחה בהצלחה")
+            // alert("הטיול עודכן בהצלחה")
             //ניתוב לקומפוננטת כל הטיולים
             this.route.navigate(['./ourTrips'])
           }
@@ -256,7 +256,6 @@ export class AddTripComponent implements OnInit {
 
         // אם ההוספה הצליחה
         else if (success > 0) {
-          alert("סוג הטיול נוסף בהצלחה")
           this.closeShow()
           // שליפת כל סוגי הטיולים
           this.getAllTypeTrips()

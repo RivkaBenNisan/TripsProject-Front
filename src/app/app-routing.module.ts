@@ -26,12 +26,6 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'addTrip/:status', component: AddTripComponent },
   { path: 'invitationsTrip/:tripId', component: InvitationsTripComponent }
-
-
-
-
-
-
 ];
 
 @NgModule({

@@ -93,11 +93,11 @@ closeShow() {
           debugger
           //אם חזר קוד תקין
           if (invitationCode > 0) {
-            alert("ההזמנה בוצעה")
             this.show = !this.show
             //service איפוס מספר המקומות ה 
             this.num = this.ourTripsService.currentTrip?.tripEmptyPlace! - this.ourTripsService.amount
             this.ourTripsService.amount = 0
+            
           }
           else {
             //service איפוס מספר המקומות ה 
